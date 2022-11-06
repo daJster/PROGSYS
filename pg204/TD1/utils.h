@@ -3,6 +3,13 @@
 
 #include <signal.h> // for sigset_t
 
+
+struct nopad {
+    char c1;
+    long l;
+    char c2;
+};
+
 /**
  * exit printing error prefixed by `prefix` if `condition` is true (non zero)
  */

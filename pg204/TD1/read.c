@@ -14,15 +14,14 @@ int main(int argc, char *argv[])
     do {
         r = read(STDIN_FILENO, c, sizeof(c));
         if (r == -1){
-            perror("read :");
+            perror("read");
             exit(EXIT_FAILURE);
         }
 
         if (write(STDOUT_FILENO, c, r) == -1){
-            perror("write :");
+            perror("write");
             exit(EXIT_FAILURE);
         }
-
     } while( r > 0);
 
     return EXIT_SUCCESS;
