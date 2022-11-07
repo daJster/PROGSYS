@@ -14,16 +14,19 @@
 int main(int argc, char *argv[])
 {
     char c[BUFFER_SIZE];
+    
     int fd = open("donnees.txt", O_RDWR);
     if (fd == -1){
         perror("open ");
         return EXIT_FAILURE;
     }
+    
     int rd = read(fd, c, 4);
     if (rd == -1){
         perror("read ");
         return EXIT_FAILURE;
     }
+    
     int wr = write(STDOUT_FILENO, c, 4);
     if (wr == -1){
         perror("write ");

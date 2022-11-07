@@ -15,10 +15,10 @@ int main(int argc, char *argv[])
     char *fifo = "versserveur";
     char c[BUFFER_SIZE];
 
-    int mkf = mkfifo(fifo, 0666);
+    int mkf = mknod(fifo, 0666, 0);
     
     if (mkf == -1){
-        perror("mkfifo ");
+        perror("mknod");
         return EXIT_FAILURE;
     }
 

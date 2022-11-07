@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    fd = dup(fd);
-    rd = read(fd, c, 4);
+    int newfd = dup(fd);
+    rd = read(newfd, c, 4);
     wr = write(STDOUT_FILENO, c, 4);
     close(fd);
     return EXIT_SUCCESS;
