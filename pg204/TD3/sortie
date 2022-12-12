@@ -1,0 +1,13 @@
+lstotal 81
+-rwxrwxrwx 1 jelkarchi jelkarchi   131 Nov  7 10:53 Makefile
+-rwxrwxrwx 1 jelkarchi jelkarchi 16872 Nov  7 11:09 buffer
+-rwxrwxrwx 1 jelkarchi jelkarchi  1236 Nov  7 11:23 buffer.c
+-rwxrwxrwx 1 jelkarchi jelkarchi 17000 Nov  7 11:57 fork
+-rwxrwxrwx 1 jelkarchi jelkarchi  1349 Nov  7 12:02 fork.c
+-rwxrwxrwx 1 jelkarchi jelkarchi 17136 Nov 14 14:16 lance
+-rwxrwxrwx 1 jelkarchi jelkarchi  1066 Nov 14 14:16 lance.c
+-rwxrwxrwx 1 jelkarchi jelkarchi  1068 Nov  7 10:53 libutils.a
+-rwxrwxrwx 1 jelkarchi jelkarchi   728 Nov 14 14:17 sortie
+-rwxrwxrwx 1 jelkarchi jelkarchi     0 Nov  7 10:53 utils.c
+-rwxrwxrwx 1 jelkarchi jelkarchi     0 Nov  7 10:53 utils.h
+-rwxrwxrwx 1 jelkarchi jelkarchi   936 Nov  7 10:53 utils.o
