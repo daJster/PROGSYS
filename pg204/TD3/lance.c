@@ -16,7 +16,7 @@ int main(int argc, char **argv){
     int fd;
     pid_t f;
     int s;
-    fd=open(argv[1], O_WRONLY|O_CREAT, 0600); // to write and create :=)
+    fd = open(argv[1], O_WRONLY|O_CREAT, 0600); // to write and create :=)
     if (fd == -1){
         perror(argv[1]);
         return EXIT_FAILURE;
@@ -31,7 +31,7 @@ int main(int argc, char **argv){
 
     if (f == 0 /*fils*/){
         dup2(fd, 1);
-        close(fd);
+        // close(fd);
         execvp(argv[2], argv+2);
         perror(argv[2]);
         return EXIT_FAILURE;

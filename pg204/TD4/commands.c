@@ -21,14 +21,14 @@
 
 char  *ls[] = { "ls", "-l", NULL};
 char  *tr[] = { "tr", "-d", "[:blank:]", NULL};
-char  *wc[] = { "wc", "-j", "[:blank:]", NULL};
-char **commandes[] = { ls, tr, wc };
+char  *wc[] = { "wc", "-j", "[:blank:]", NULL}; 
+char **commandes[] = { ls, tr, wc }; // pipeline
 int nb_commandes = sizeof(commandes) / sizeof(char*);
 
 
 
 int main(int argc, char **argv){
-    int i,s;
+    int i,s, j;
     pid_t f;
 
     int fd_pipes[(nb_commandes-1)*2];
@@ -48,14 +48,16 @@ int main(int argc, char **argv){
 
         if (f == 0){
             if (i > 0){
-                dup2(fd_pipes[2*(i-1)], 0);
+                dup2(fd_pipes[2*(i-1)], 0); // stdin
             }
             if ( i < (nb_commandes-1)*2){
-                dup2(fd_pipes[2*(i+1)], 1);
+                dup2(fd_pipes[2*(i+1)], 1); // stdout
             }
-            for (i = 0; i < (nb_commandes-1)*2; i++){
-                close(fd_pipes[i]);
+
+            for (j = 0; j < (nb_commandes-1)*2; j++){
+                close(fd_pipes[j]);
             }
+            
             execvp(commandes[i][0], commandes[i]);
             perror(commandes[i][0]);
             return EXIT_FAILURE;

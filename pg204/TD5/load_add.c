@@ -12,7 +12,7 @@
 #include "utils.h"
 #include "signal.h"
 
-#define BUFFER_SIZE 2048
+#define SIZE 2048
 
 int add (int i, int j){
     return i + j;
@@ -26,22 +26,22 @@ int main(){
         return EXIT_FAILURE;
     }
 
-    char buffer[BUFFER_SIZE];
+    char buffer[SIZE];
 
-    int wr = write (fd, buffer, BUFFER_SIZE);
+    int wr = write (fd, buffer, SIZE);
     if (wr == -1){
         perror("write");
         return EXIT_SUCCESS;
     }
     
-    void *m = mmap(NULL, BUFFER_SIZE, PROT_EXEC|PROT_WRITE, MAP_SHARED, fd, 0);
+    void *m = mmap(NULL, SIZE, PROT_EXEC|PROT_WRITE, MAP_SHARED, fd, 0);
     if ( m == MAP_FAILED){
         perror("mmap");
         return EXIT_FAILURE;
     }
 
-    memcpy(m, (void *)add, BUFFER_SIZE);
+    memcpy(m, (void *)add, SIZE);
 
-    munmap(m, BUFFER_SIZE);
+    munmap(m, SIZE);
     return EXIT_SUCCESS;
 }

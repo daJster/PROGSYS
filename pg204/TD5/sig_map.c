@@ -15,7 +15,7 @@
 void handler(int s){}
 
 int main(){
-    int fd = open("mysignal", O_RDWR);
+    int fd = open("mysignal.txt", O_RDWR);
     int fdsize;
     pid_t *area;
     void *mmap_addr;
@@ -39,15 +39,15 @@ int main(){
 
     fdsize = fd_infos.st_size;
 
-    if ((mmap_addr = mmap(NULL, fdsize, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0)) == MAP_FAILED){
+    if ((mmap_addr = mmap(NULL, fdsize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)) == MAP_FAILED){
         perror("mmap");
         return EXIT_FAILURE;
     }
 
     // encodage
-    snprintf(mmap_addr, fdsize, "%d", getpid()); // cas ascii
-    // *(pid_t*)mmap_addr = getpid(); // cas binaire
-    area = mmap_addr;
+    snprintf(mmap_addr+1, fdsize, "%d\n", getpid()); // cas ascii
+    // *(pid_t*) mmap_addr = getpid(); // cas binaire
+    area = mmap_addr+1;
     area[0] = getpid();
     printf("pid %d ecrit en binaire dans la memoire mmap\n", getpid());
     signal(SIGUSR1, handler);

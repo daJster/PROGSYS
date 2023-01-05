@@ -1,0 +1,16 @@
+lsMakefile
+buffer
+buffer.c
+fork
+fork.c
+lance
+lance.c
+lance.txt
+libutils.a
+segfault.c
+sortie
+train
+train.c
+utils.c
+utils.h
+utils.o

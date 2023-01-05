@@ -2,7 +2,6 @@
 
 
 int main(){
-    int *p = 1;
-    *p = 10;
+    *((char *) 0) = 'c';
     return 0;
 }

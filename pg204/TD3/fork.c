@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
     // correction mine is correct too
     pid_t p;
     int i;
-    printf("pid[%d] \n", getpid()); // try w \n and w/o it, the buffer get broken so the son processus doesn't show it when there is a \n
+    printf("pid[%d]\n", getpid()); // try w \n and w/o it, the buffer get broken so the son processus doesn't show it when there is a \n
     p = fork();
     if (p == -1){
         perror("fork");
@@ -30,9 +30,9 @@ int main(int argc, char *argv[]){
     } 
     
     if (p == 0){
-        printf("fils : [%d / %d]", getpid(), getppid()); // getppid parent pid
+        printf("fils : [%d / %d]\n", getpid(), getppid()); // getppid parent pid
         execlp("ls","ls", NULL);
-        perro("ls");
+        perror("ls");
         return EXIT_FAILURE;
     } else {
         for (i = 0; i < 10; i++){

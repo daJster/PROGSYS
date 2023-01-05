@@ -15,7 +15,7 @@
 void handler(int s){}
 
 int main(){
-    int fd = open("mysignal", O_RDWR);
+    int fd = open("mysignal.txt", O_RDWR);
     int fdsize;
     // pid_t *area;
     void *mmap_addr;
@@ -39,7 +39,7 @@ int main(){
 
     fdsize = fd_infos.st_size;
 
-    if ((mmap_addr = mmap(NULL, fdsize, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0)) == MAP_FAILED){
+    if ((mmap_addr = mmap(NULL, fdsize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)) == MAP_FAILED){
         perror("mmap");
         return EXIT_FAILURE;
     }
@@ -50,7 +50,7 @@ int main(){
     pid_t receveur_pid = atoi(mmap_addr);  //cas ascii
     // receveur_pid = *(pid_t*)mmap_addr; // cas binaire
 
-    printf("Expediteur reading stdout\n");
+    printf("Expediteur reading stdout PID to kill : %d\n", (int) receveur_pid);
     int rd = read(STDIN_FILENO, mmap_addr, fdsize);
     if (rd == -1){
         perror("read");
@@ -58,7 +58,7 @@ int main(){
     }
 
     int i = 0;
-    while(1){
+    while(i < fdsize){
         printf("%d\n", i);
         ((char *)mmap_addr)[i++] = 10;
     } 

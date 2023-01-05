@@ -1,6 +1,6 @@
 LDFLAGS=-L.
 LDLIBS=-lutils
-CFLAGS+= -D_GNU_SOURCE  -Werror -pthread
+CFLAGS+= -D_GNU_SOURCE -Wall -Werror -pthread
 
 
 libutils.a: utils.o

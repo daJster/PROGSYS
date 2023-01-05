@@ -12,7 +12,7 @@
 #include "utils.h"
 #include "signal.h"
 
-#define BUFFER_SIZE 2048
+#define SIZE 2048
 
 int main(){
 
@@ -23,7 +23,7 @@ int main(){
         return EXIT_FAILURE;
     }
 
-    void * m = mmap(NULL, BUFFER_SIZE, PROT_EXEC, MAP_SHARED, fd, 0);
+    void * m = mmap(NULL, SIZE, PROT_EXEC, MAP_SHARED, fd, 0);
     if (m == MAP_FAILED){
         perror("mmap");
         return EXIT_FAILURE;
@@ -33,6 +33,6 @@ int main(){
 
     printf("result is : %d\n", ptr_add(10,13));
 
-    munmap(m, BUFFER_SIZE);
+    munmap(m, SIZE);
     return EXIT_SUCCESS;
 }

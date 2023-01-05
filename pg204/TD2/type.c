@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h> 
 
 #include <unistd.h>
 
@@ -13,15 +14,28 @@ int main(int argc, char *argv[])
     int i;
     size_t r;
 
-    struct stat statBuff;
-    int type = fstat(STDIN_FILENO, &statBuff);
-
-    if (type == -1){
-        perror("type :");
-        return EXIT_FAILURE;
+    if (argc != 2) {
+        printf("Usage: fstat <file>\n");
+        return 1;
     }
 
-    switch (statBuff.st_mode & S_IFMT)
+    const char *filename = argv[1];
+    struct stat file_stat;
+    int fd;
+
+    fd = open(filename, O_RDONLY);
+    if (fd == -1) {
+        perror("open");
+        return 1;
+    }
+
+    if (fstat(fd, &file_stat) == -1) {
+        perror("fstat");
+        return 1;
+    }
+
+    printf("file type : ");
+    switch (file_stat.st_mode & S_IFMT)
     {
     case S_IFBLK:
         printf("block device \n");
@@ -66,6 +80,6 @@ int main(int argc, char *argv[])
     }
 
 
-    printf("statBuff is : %d\n", statBuff.st_mode);
+    printf("statBuff is : %d\n", file_stat.st_mode);
     return EXIT_SUCCESS;
 }
